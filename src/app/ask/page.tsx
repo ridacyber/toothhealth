@@ -1,17 +1,10 @@
-'use client';
-
-import { useSearchParams } from 'next/navigation';
-import AIResponsePanel from '@/components/AIResponsePanel';
+import { Suspense } from 'react';
+import AskPageClient from './AskPageClient';
 
 export default function AskPage() {
-  const searchParams = useSearchParams();
-  const question = searchParams.get('q') || '';
-
   return (
-    <div className="min-h-screen flex flex-col py-24 px-4">
-      <div className="flex-1 max-w-4xl mx-auto w-full">
-        <AIResponsePanel initialQuestion={question} />
-      </div>
-    </div>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-muted">Loading...</div>}>
+      <AskPageClient />
+    </Suspense>
   );
 }
